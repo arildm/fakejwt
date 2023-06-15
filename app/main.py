@@ -25,7 +25,7 @@ def get_jwt(id: int):
     return store[id]
 
 
-@app.put("/jwt")
+@app.put("/jwt", status_code=201)
 def put_jwt(jwt: Jwt):
     id = len(store)
     store[id] = jwt
