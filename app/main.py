@@ -1,15 +1,8 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
 
 app = FastAPI()
 
 
-class Jwt(BaseModel):
-    sub: str
-    name: str
-    iat: int
-
-  
 store = dict()
 
 
@@ -26,7 +19,7 @@ def get_jwt(id: int):
 
 
 @app.put("/jwt", status_code=201)
-def put_jwt(jwt: Jwt):
+def put_jwt(jwt: dict):
     id = len(store)
     store[id] = jwt
     return {"id": id}

@@ -26,3 +26,19 @@ def test_put_bad():
 def test_get_missing():
     response = client.get('/jwt', params={"id": 123})
     assert response.status_code == 404
+
+def test_any():
+    jwt = {
+        "sub" : "xmatar",
+        "name" : "Arild",
+        "iat" : 123,
+        "foo": "bar",
+    }
+    response = client.put('/jwt', json=jwt)
+    assert response.status_code == 201
+    id = response.json()["id"]
+    assert response.json() == {"id": id}
+
+    response = client.get('/jwt', params={"id": id})
+    assert response.status_code == 200
+    assert response.json() == jwt
