@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -20,6 +20,8 @@ def read_root():
 
 @app.get("/jwt")
 def get_jwt(id: int):
+    if (id not in store):
+        raise HTTPException(404)
     return store[id]
 
 
