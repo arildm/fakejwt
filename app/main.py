@@ -1,10 +1,12 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import PlainTextResponse
+from jwt import encode
 
 app = FastAPI()
-
-
 store = dict()
-
+# This "private" key is not actually secret in this particular app.
+with open('conf/privkey.pem', 'rb') as f:
+    privkey = f.read()
 
 @app.get("/")
 def read_root():
@@ -12,10 +14,12 @@ def read_root():
 
 
 @app.get("/jwt")
-def get_jwt(id: int):
-    if (id not in store):
+def get_jwt(id: int) -> PlainTextResponse:
+    if id not in store:
         raise HTTPException(404)
-    return store[id]
+    payload = store[id]
+    token = encode(payload, privkey, algorithm="RS256")
+    return PlainTextResponse(token)
 
 
 @app.put("/jwt", status_code=201)
