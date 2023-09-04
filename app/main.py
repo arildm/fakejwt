@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import PlainTextResponse
+from fastapi.middleware.cors import CORSMiddleware
 from jwt import encode
 
 app = FastAPI()
@@ -7,6 +8,12 @@ store = dict()
 # This "private" key is not actually secret in this particular app.
 with open('conf/privkey.pem', 'rb') as f:
     privkey = f.read()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex='.*',
+    allow_credentials=True,
+)
 
 @app.get("/")
 def read_root():
