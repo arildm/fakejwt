@@ -4,7 +4,10 @@ Test your web apps against customized [jwts](https://jwt.io/).
 
 ## API
 
-TODO
+| Route          | Method | Request      | Response                                         |
+| -------------- | ------ | ------------ | ------------------------------------------------ |
+| `/jwt`         | `PUT`  | Payload JSON | The id (int) of stored payload                   |
+| `/jwt?id=<id>` | `GET`  |              | The encoded JWT containing the indicated payload |
 
 ## Development
 
