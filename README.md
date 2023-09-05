@@ -14,10 +14,10 @@ If the application also verifies the token, it must be configured to use the fak
 
 ## API
 
-| Route          | Method | Request      | Response                                         |
-| -------------- | ------ | ------------ | ------------------------------------------------ |
-| `/jwt`         | `PUT`  | Payload JSON | The id (int) of stored payload                   |
-| `/jwt?id=<id>` | `GET`  |              | The encoded JWT containing the indicated payload |
+| Route       | Method | Request body    | Response                                         |
+| ----------- | ------ | --------------- | ------------------------------------------------ |
+| `/jwt/<id>` | `PUT`  | Payload as JSON |                                                  |
+| `/jwt/<id>` | `GET`  |                 | The encoded JWT containing the indicated payload |
 
 ## Development
 
